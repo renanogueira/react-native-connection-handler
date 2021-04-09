@@ -1,31 +1,21 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import ConnectionHandler from 'react-native-connection-handler';
+import { Text } from 'react-native';
+import { NetworkProvider, useNetwork } from 'react-native-connection-handler';
 
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+export default function App(): React.ReactElement {
+  const network = useNetwork();
 
-  React.useEffect(() => {
-    ConnectionHandler.multiply(3, 7).then(setResult);
-  }, []);
+  // React.useEffect(() => {
+  //   toast.show({ message: 'oi', color: '#000' });
+  // }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <NetworkProvider>
+      <>
+        <Text>{`Conectado: ${network.isConnected}`}</Text>
+        <Text>{`Alcançável: ${network.isReachable}`}</Text>
+      </>
+    </NetworkProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});

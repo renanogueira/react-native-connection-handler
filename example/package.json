@@ -9,6 +9,7 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "@react-native-community/netinfo": "^6.0.0",
     "react": "16.13.1",
     "react-native": "0.63.4"
   },
